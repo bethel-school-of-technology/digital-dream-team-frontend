@@ -12,7 +12,7 @@ function Header() {
                         <Navbar.Text className="ms-3 cool-title">ResumeBuilder</Navbar.Text>
                     </Nav>
                     <Nav>
-                        <Link to="/" className="nav-link">Builder</Link>
+                        <Link to="/builder" className="nav-link">Builder</Link>
                         <Link to="/" className="nav-link">Generate</Link>
                         <Link to="/" className="nav-link">Profile</Link>
                         <Link to="/" className="nav-link">Sign In</Link>
