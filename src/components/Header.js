@@ -15,7 +15,7 @@ function Header() {
                         <Link to="/" className="nav-link">Builder</Link>
                         <Link to="/" className="nav-link">Generate</Link>
                         <Link to="/" className="nav-link">Profile</Link>
-                        <Link to="/" className="nav-link">Sign In</Link>
+                        <Link to="/sign-in" className="nav-link">Sign In</Link>
                     </Nav>
                 </Container>
             </Navbar>
