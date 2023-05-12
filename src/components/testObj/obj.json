@@ -1,0 +1,106 @@
+{"example" : {
+  "identity": {
+    "first" : "daniel",
+    "last" : "schliesing",
+    "address" : "123 test Blvd",
+    "phone" : "123-123-1234",
+    "email" : "daniel.schliesing@gmail.com",
+    "portfolioSite" : "dsdeveloper.tech",
+    "linkedIn" : "https://www.linkedin.com/in/daniel-schliesing/"
+  },
+  "skills" : [
+    "CSS", "React", "Javascript", "iOS Development",
+    "Swift", "Vim Motions", "Blender", "Unreal Engine", 
+    "C++", "Design Patterns", "Python", "Adobe Creative Suite",
+    "Figma"
+  ],
+  "jobs" : [
+    {
+      "title" : "Full Stack Developer",
+      "dateBegan" : "1/2/22",
+      "dateEnd" : "1/2/23",
+      "accomplishments" : ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
+    }, 
+    {
+      "title" : "Half Stack Developer",
+      "dateBegan" : "1/2/22",
+      "dateEnd" : "1/2/23",
+      "accomplishments" : ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
+    }
+  ],
+  "projects" : [
+    { 
+      "title" : "Json proj",
+      "dateBegan" : "1/2/22",
+      "dateEnd" : "1/2/23",
+      "accomplishments" : ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
+    }, 
+    {
+      "title" : "React proj",
+      "dateBegan" : "1/2/22",
+      "dateEnd" : "1/2/23",
+      "accomplishments" : ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
+    }
+  ],
+  "education" : [
+    {
+      "school": "UAA",
+      "degree" : "mech engr",
+      "dateFinished" : "exp 2026"
+    }
+  ],
+  "certifications" :[
+    {
+      "provider" : "AWS",
+      "certName" : "AWS Certified Practitioner",
+      "date" : "1/2/23"
+    }
+  ]
+},
+
+
+
+"empty":{
+  "identity": {
+    "first" : "",
+    "last" : "",
+    "address" : "",
+    "phone" : "",
+    "email" : "",
+    "portfolioSite" : "",
+    "linkedIn" : ""
+  },
+  "skills" : [
+  ],
+  "jobs" : [ 
+    {
+      "title" : "",
+      "dateBegan" : "",
+      "dateEnd" : "",
+      "accomplishments" : []
+    }
+  ],
+  "projects" : [
+    { 
+      "title" : "",
+      "dateBegan" : "",
+      "dateEnd" : "",
+      "accomplishments" : []
+    }
+  ],
+  "education" : [
+    {
+      "school": "UAA",
+      "degree" : "mech engr",
+      "dateFinished" : ""
+    }
+  ],
+  "certifications" :[
+    {
+      "provider" : "",
+      "certName" : "",
+      "date" : ""
+    }
+  ]
+}
+}
