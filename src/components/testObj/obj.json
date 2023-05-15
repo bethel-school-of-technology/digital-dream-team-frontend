@@ -66,39 +66,41 @@
     "last" : "",
     "address" : "",
     "phone" : "",
+    "title" : "",
     "email" : "",
-    "portfolioSite" : "",
-    "linkedIn" : ""
+    "portfoliosite" : "",
+    "linkedin" : ""
   },
   "skills" : [
   ],
   "jobs" : [ 
     {
       "title" : "",
-      "dateBegan" : "",
-      "dateEnd" : "",
+      "company": "",
+      "startdate" : "",
+      "enddate" : "",
       "accomplishments" : []
     }
   ],
   "projects" : [
     { 
       "title" : "",
-      "dateBegan" : "",
-      "dateEnd" : "",
+      "startdate" : "",
+      "enddate" : "",
       "accomplishments" : []
     }
   ],
   "education" : [
     {
-      "school": "UAA",
-      "degree" : "mech engr",
-      "dateFinished" : ""
+      "school": "",
+      "degree" : "",
+      "date" : ""
     }
   ],
   "certifications" :[
     {
       "provider" : "",
-      "certName" : "",
+      "certification" : "",
       "date" : ""
     }
   ]

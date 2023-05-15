@@ -5,11 +5,10 @@ import { Link, Outlet } from "react-router-dom";
 function Header() {
     return (
         <div>
-            <Navbar bg="black" variant="dark">
+            <Navbar bg="light" variant="light">
                 <Container>
                     <Nav className="nav-title-and-photo">
-                        <Image className="nav-photo" src={"#"} height="40" />
-                        <Navbar.Text className="ms-3 cool-title">ResumeBuilder</Navbar.Text>
+                        <Image className="nav-photo" src={"arbys.png"} height="40" />
                     </Nav>
                     <Nav>
                         <Link to="/builder" className="nav-link">Builder</Link>
