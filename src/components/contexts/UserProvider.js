@@ -33,8 +33,8 @@ export const UserProvider = (props) => {
           return JSON.parse(jsonPayload);
       }
 
-    function createUser(username, password, firstname, lastname, city, state) {       
-        let user = { username, password, firstname, lastname, city, state };
+    function createUser(username, password) {       
+        let user = { username, password };
         
         return axios.post(baseUrl, user)
             .then(response => {

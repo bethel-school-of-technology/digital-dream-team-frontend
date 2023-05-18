@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/SignIn.css';
 import UserContext from './contexts/UserContext';
 
@@ -23,9 +23,7 @@ const SignIn = () => {
     return (
             <form className='sign-in-form' onSubmit={handleSubmit}>
                 <h2>Sign In</h2>
-                <button className='sign-up-btn'>
-                    Sign Up
-                </button>
+                <Link to={`/sign-up`} className='sign-up-btn'>Sign Up</Link>
                 <br />
                 <div className='sign-up-input'>
                     <span>Username:  </span>

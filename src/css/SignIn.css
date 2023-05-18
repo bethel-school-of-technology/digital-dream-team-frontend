@@ -25,7 +25,16 @@
     color: white;
     margin-top: 0.5em;
     margin-right: 0.5em;
+    text-decoration: none;
+}
 
+.sign-in-btn {
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em 3em;
+    background-color: rgb(218, 127, 127);
+    color: white;
+    text-decoration: none;
 }
 
 .sign-in-form {
