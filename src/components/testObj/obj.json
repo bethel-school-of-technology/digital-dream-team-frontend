@@ -90,7 +90,7 @@
       "accomplishments" : []
     }
   ],
-  "education" : [
+  "educations" : [
     {
       "school": "",
       "degree" : "",
@@ -99,8 +99,8 @@
   ],
   "certifications" :[
     {
-      "provider" : "",
       "certification" : "",
+      "provider" : "",
       "date" : ""
     }
   ]
