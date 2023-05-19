@@ -5,6 +5,8 @@ import BuilderIdentity from "./builderComponents/BuilderIdentity";
 import Data from "./testObj/obj.json";
 import ResumeAccolade from "./builderComponents/ResumeAccolade";
 import ResumeItem from "./builderComponents/ResumeItem";
+import Project from "./builderComponents/Project";
+import Job from "./builderComponents/Job";
 
 function Builder() {
   //builder output struct
@@ -17,7 +19,7 @@ function Builder() {
     e.preventDefault()//prevent double input
     const formData = new FormData(e.target),
                 formDataObj = Object.fromEntries(formData.entries())
-    console.log(builderInfo.skills)
+    //console.log(builderInfo.skills)
 
     //may consolidate all setBuilders into one function call
     setBuilderInfo(
@@ -36,7 +38,7 @@ function Builder() {
     if (!builderInfo.skills) {
       return <></>
     }
-    console.log(builderInfo)
+    //console.log(builderInfo)
     return builderInfo.skills.map((skill) => {
       return <ListGroupItem><Card><Button>X {skill}</Button></Card></ListGroupItem>
     })
@@ -60,75 +62,54 @@ function Builder() {
   }
 
 
-  //some of this may need to get reworked, trying for code reuse
-  // data is a flag telling function if it is a job or project
-  function updateJobProj(e, data){
-    
-    let temp = builderInfo[data]//its like builderinfo.projects
+  function updateJob(e){
+    let temp = builderInfo.jobs//its like builderinfo.projects
     temp[e.target.name] = e.target.value
  
-    if (data === "jobs"){
-      setBuilderInfo(
-        builderInfo => {
-          return {
-               ...builderInfo,
-              jobs : temp
-          }
-       }
-      )
-    } else {
-      setBuilderInfo(
-        builderInfo => {
-          return {
-                ...builderInfo,
-              projects : temp
-          }
+    setBuilderInfo(
+      builderInfo => {
+        return {
+              ...builderInfo,
+            jobs : temp
         }
-      )
-    } 
-    //console.log(builderInfo)
+      }
+    )
+
   }
-  function updateAccomplishments(e, data){
-    let val = e.target[0].value
-    console.log(typeof(builderInfo.jobs))
-    let temp;
 
-    if (data === "jobs"){
-
-      if (builderInfo.jobs.accomplishments === undefined){
-        temp = [val]
-      } else{
-        temp = [...builderInfo.jobs.accomplishments, val]
-      }
-
-      setBuilderInfo(
-        builderInfo => {
-          return {
-               ...builderInfo,
-              jobs : {
-                accomplishments : temp
-              }
-          }
-       }
-      )
-    } else {
-      if (builderInfo.projects.accomplishments === undefined){
-        temp = [val]
-      } else{
-        temp = [...builderInfo.projects.accomplishments, val]
-      }
-      
-      setBuilderInfo(
-        builderInfo => {
-          return {
-                ...builderInfo,
-              projects : {
-                accomplishments : temp
-              }
-          }
+  function updateProject(e){
+    let temp = builderInfo.projects//its like builderinfo.projects
+    temp[e.target.name] = e.target.value
+ 
+    setBuilderInfo(
+      builderInfo => {
+        return {
+              ...builderInfo,
+            projects : temp
         }
-      )
-    } 
+      }
+    )
+  }
+  
+  function updateAccomJob(temp){
+    setBuilderInfo(
+      builderInfo => {
+        return {
+              ...builderInfo,
+            jobs : temp
+        }
+      }
+    )
+  }
+  function updateAccomProj(temp){
+    setBuilderInfo(
+      builderInfo => {
+        return {
+              ...builderInfo,
+            projects : temp
+        }
+      }
+    )
   }
 
   function updateAccolades(e, data){
@@ -137,6 +118,7 @@ function Builder() {
     let temp = builderInfo[data]//its like builderinfo.certifications
       //data form of a cert : {cert, provider, date}
     temp[mkey] = val
+    console.log(val)
     setBuilderInfo(
       builderInfo => {
         return {
@@ -145,10 +127,102 @@ function Builder() {
         }
      }
     )
-    console.log(builderInfo)
+    //console.log(builderInfo)
   }
 
-  
+  function newJob(e){
+    let temp = builderInfo.jobs
+    temp.push({
+      "title" : "",
+      "company": "",
+      "startdate" : "",
+      "enddate" : "",
+      "accomplishments" : []
+    })
+    setBuilderInfo(
+      builderInfo => {
+        return {
+              ...builderInfo,
+            jobs : temp
+        }
+      }
+    )
+    e.preventDefault()
+
+  }
+  function newProject(e){
+    let temp = builderInfo.projects
+    temp.push({
+      "title" : "",
+      "startdate" : "",
+      "enddate" : "",
+      "accomplishments" : []
+    })
+    setBuilderInfo(
+      builderInfo => {
+        return {
+              ...builderInfo,
+            projects : temp
+        }
+      }
+    )
+    e.preventDefault()
+
+  }
+
+  function newEducation(e){
+    let temp = builderInfo.educations
+    if (typeof(temp) === "object"){
+      temp = [temp]
+    }
+    temp.push({
+      "school": "",
+      "degree" : "",
+      "date" : ""
+    })
+    setBuilderInfo(
+      builderInfo => {
+        return {
+              ...builderInfo,
+            educations : temp
+        }
+      }
+    )
+    e.preventDefault()
+  }
+
+  function removeItem(array, type){
+    let temp = builderInfo
+    temp[type] = array
+    setBuilderInfo(temp
+    )
+  }
+
+  function newCertification(e){
+    let temp = builderInfo.certifications
+    if (typeof(temp) === "object"){
+      temp = [temp]
+    }
+    temp.push({
+      "certification" : "",
+      "provider" : "",
+      "date" : ""
+    })
+    setBuilderInfo(
+      builderInfo => {
+        return {
+              ...builderInfo,
+            certifications : temp
+        }
+      }
+    )
+    e.preventDefault()
+  }
+
+  function outputResume(e){
+    console.log(builderInfo)
+    e.preventDefault()
+  }
   return (
       <div>
         <style type="text/css">
@@ -173,36 +247,38 @@ function Builder() {
           </ListGroupItem>
 
           <ListGroupItem variant="container">
-            <Button>+ Job</Button>
-            <ResumeItem item={builderInfo.jobs}
-                          which={"jobs"}
-                        updateJobProj={updateJobProj} 
-                        updateAccomplishments={updateAccomplishments}/>
+            <Button onClick={(e) => newJob(e)}>+ Job</Button>
+            <Job item={builderInfo.jobs}
+                        updateAccomJob={updateAccomJob}
+                        updateJob={updateJob} 
+                        removeItem={removeItem}/>
           </ListGroupItem>
           <ListGroupItem variant="container">
-            <Button>+ Project</Button>
-            <ResumeItem item={builderInfo.projects}
-                        which={"projects"}
-                        updateJobProj={updateJobProj}
-                        updateAccomplishments={updateAccomplishments}/>
+            <Button onClick={(e) => newProject(e)}>+ Project</Button>
+            <Project item={builderInfo.projects}
+                        updateAccomProj={updateAccomProj}
+                        updateProject={updateProject} 
+                        removeItem={removeItem}/>
           </ListGroupItem>
 
           <ListGroupItem variant="container">
-            <Button>+ Education</Button>
-            <ResumeAccolade accolades={builderInfo.education}
-              which={{a: "school", b: "degree"}}
+            <Button onClick={(e) =>newEducation(e)}>+ Education</Button>
+            <ResumeAccolade accolades={builderInfo.educations}
+              which={{a: "school", b: "degree", type: "educations"}}
               updateAccolades={updateAccolades}
+              removeItem={removeItem}
             />
           </ListGroupItem>
           <ListGroupItem variant="container">
-            <Button>+ Certifications</Button>
+            <Button onClick={(e) => newCertification(e)}>+ Certifications</Button>
             <ResumeAccolade accolades={builderInfo.certifications}
-              which={{a: "provider", b: "certification"}}
+              which={{a: "certification", b: "provider", type: "certifications"}}
               updateAccolades={updateAccolades}
+              removeItem={removeItem}
             />
           </ListGroupItem>
         </ListGroup>
-        <Button>Submit</Button>
+        <Button onClick={(e) => outputResume(e)}>Submit</Button>
       </div>
   )
 }
