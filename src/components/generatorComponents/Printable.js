@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import { Container, Row, Nav, Navbar, Stack, Image, ListGroup, ListGroupItem, Card, Form, Button, Col, CardGroup } from "react-bootstrap";
 import "../../css/Printable.css"
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+
 function Printable(props){
   let resume = props.resume
   let identity = resume.identity
@@ -11,6 +14,25 @@ function Printable(props){
   let educations = resume.educations
   let certs = resume.certifications
   
+
+  function printDocument() {
+    const input = document.getElementById('divToPrint');
+    html2canvas(input)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        pdf.addImage(imgData, 'JPEG', 0, 0);
+        // pdf.output('dataurlnewwindow');
+        pdf.save("download.pdf");
+      })
+    ;
+  }
+  function printHTML(e){
+    printDocument()
+    e.preventDefault()
+  }
+
+
   function myHeader(){
     return (
     <div style={{textAlign: "center"}}>
@@ -80,7 +102,15 @@ function Printable(props){
     })
   }
   return (
-    <div contentEditable="true">
+   <div>
+    <Button onClick={(e) => printHTML(e)}>Print</Button>
+    <div id="divToPrint" style={{
+        width: '210mm',
+        minHeight: '297mm',
+        marginLeft: 'auto',
+        marginRight: 'auto'
+      }}>
+     <div contentEditable="true">
       {myHeader()}
       <h5>Skills</h5>
       <ul >{mapSkills()}</ul>
@@ -93,6 +123,8 @@ function Printable(props){
       <h5>Certifications</h5>
       <div>{mapCertifications()}</div>
     </div>
+   </div>
+   </div>
   )
 }
 
