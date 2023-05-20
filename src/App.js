@@ -6,10 +6,12 @@ import Builder from './components/Builder';
 import SignIn from './components/SignIn';
 import { UserProvider } from './components/contexts/UserProvider';
 import SignUp from './components/SignUp';
+import Generator from './components/Generator';
 
+
+//need to re add   </UserProvider>
 function App() {
   return (
-    <UserProvider>
       <BrowserRouter>
           <Routes>
               <Route exact path="/" element={ <Header /> } >
@@ -17,11 +19,12 @@ function App() {
                 <Route path="builder" element={<Builder />} /> 
                 <Route path="sign-in" element={<SignIn />} />
                 <Route path="sign-up" element={<SignUp />} />
+                <Route path="generator" element={<Generator />} />
               </Route>
               <Route path="*" element={<h1>Page Not Found</h1>} />
           </Routes>
       </BrowserRouter>
-    </UserProvider>
+  
   );
 }
 
