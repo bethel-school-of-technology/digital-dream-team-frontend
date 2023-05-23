@@ -4,11 +4,10 @@ import UserContext from "./UserContext";
 
 export const UserProvider = (props) => {
 
-    const baseUrl = "http://localhost:3000/api/users/";
+    const baseUrl = "http://localhost:3001/api/users/";
 
     let [isSignedIn, setIsSignedIn] = useState("");
     let [user, setUser] = useState("");
-    let [allUsers, setAllUsers] = useState([]);
 
     useEffect(() => {
         async function fetchData(id) {
@@ -17,10 +16,6 @@ export const UserProvider = (props) => {
         if (isSignedIn) {
             fetchData(parseJwt(isSignedIn).userId)
         };
-        async function fetchUsers() {
-            await getAllUsers();
-        }
-        fetchUsers()
     }, [isSignedIn]);
 
     // Takes the JWT token from local storage and returns the user's id.  Referenced from the JWT package in npm
@@ -64,10 +59,6 @@ export const UserProvider = (props) => {
         
     }
 
-    function getAllUsers() {
-        return axios.get(baseUrl).then(response => setAllUsers(response.data));
-    }
-
     return (
         <UserContext.Provider value={{
             createUser,
@@ -75,8 +66,7 @@ export const UserProvider = (props) => {
             getUser,
             isSignedIn,
             setIsSignedIn,
-            user,
-            allUsers
+            user
         }}>
             { props.children }
         </UserContext.Provider>
