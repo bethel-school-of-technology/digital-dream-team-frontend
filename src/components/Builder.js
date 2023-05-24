@@ -118,7 +118,6 @@ function Builder() {
     let temp = builderInfo[data]//its like builderinfo.certifications
       //data form of a cert : {cert, provider, date}
     temp[mkey] = val
-    console.log(val)
     setBuilderInfo(
       builderInfo => {
         return {

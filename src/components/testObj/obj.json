@@ -1,12 +1,13 @@
 {"example" : {
   "identity": {
-    "first" : "daniel",
-    "last" : "schliesing",
+    "first" : "Daniel",
+    "last" : "schlee",
+    "title":"Full Stack Developer",
     "address" : "123 test Blvd",
     "phone" : "123-123-1234",
-    "email" : "daniel.schliesing@gmail.com",
-    "portfolioSite" : "dsdeveloper.tech",
-    "linkedIn" : "https://www.linkedin.com/in/daniel-schliesing/"
+    "email" : "daniel@gmail.com",
+    "portfolioSite" : "donal.tech",
+    "linkedin" : "https://www.linkedin.com/in/daniel/"
   },
   "skills" : [
     "CSS", "React", "Javascript", "iOS Development",
@@ -17,42 +18,44 @@
   "jobs" : [
     {
       "title" : "Full Stack Developer",
-      "dateBegan" : "1/2/22",
-      "dateEnd" : "1/2/23",
+      "company": "apple",
+      "startdate" : "1/2/22",
+      "enddate" : "1/2/23",
       "accomplishments" : ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
     }, 
     {
       "title" : "Half Stack Developer",
-      "dateBegan" : "1/2/22",
-      "dateEnd" : "1/2/23",
+      "company": "dapple",
+      "startdate" : "1/2/22",
+      "enddate" : "1/2/23",
       "accomplishments" : ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
     }
   ],
   "projects" : [
     { 
       "title" : "Json proj",
-      "dateBegan" : "1/2/22",
-      "dateEnd" : "1/2/23",
+      "startdate" : "1/2/22",
+      "enddate" : "1/2/23",
       "accomplishments" : ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
     }, 
     {
       "title" : "React proj",
-      "dateBegan" : "1/2/22",
-      "dateEnd" : "1/2/23",
+      "startdate" : "1/2/22",
+      "enddate" : "1/2/23",
       "accomplishments" : ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
     }
   ],
-  "education" : [
+  "educations" : [
     {
       "school": "UAA",
       "degree" : "mech engr",
-      "dateFinished" : "exp 2026"
+      "date" : "exp 2026"
     }
   ],
   "certifications" :[
     {
       "provider" : "AWS",
-      "certName" : "AWS Certified Practitioner",
+      "certification" : "AWS Certified Practitioner",
       "date" : "1/2/23"
     }
   ]

@@ -12,7 +12,7 @@ function Header() {
                     </Nav>
                     <Nav>
                         <Link to="/builder" className="nav-link">Builder</Link>
-                        <Link to="/" className="nav-link">Generate</Link>
+                        <Link to="/generator" className="nav-link">Generate</Link>
                         <Link to="/" className="nav-link">Profile</Link>
                         <Link to="/sign-in" className="nav-link">Sign In</Link>
                     </Nav>
