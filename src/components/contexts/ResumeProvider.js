@@ -1,21 +1,29 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ResumeContext from "./ResumeContext";
+import UserContext from "./UserContext";
 
 export const ResumeProvider = (props) => {
 
     const [ resumes, setResumes ] = useState([]);
     const baseUrl = "http://localhost:3001/api/resume/";
+    let { isSignedIn } = useContext(UserContext);
 
     useEffect(() => {
         async function fetchData() {
             await getAllResumes();
         }
-        fetchData();
-    }, []);
+        if (isSignedIn) {
+            fetchData();
+        }
+    }, [isSignedIn]);
 
     function getAllResumes() {
-        return axios.get(baseUrl).then(response => setResumes(response.data));
+        let myHeaders = {
+            Authorization: `Bearer ${localStorage.getItem('myUserToken')}`
+        };
+
+        return axios.get(baseUrl, { headers: myHeaders }).then(response => setResumes(response.data));
     }
 
     function getResume(id) {
