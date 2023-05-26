@@ -6,7 +6,7 @@ export const UserProvider = (props) => {
 
     const baseUrl = "http://localhost:3001/api/users/";
 
-    let [isSignedIn, setIsSignedIn] = useState("");
+    let [isSignedIn, setIsSignedIn] = useState(localStorage.getItem("myUserToken"));
     let [user, setUser] = useState("");
 
     useEffect(() => {
