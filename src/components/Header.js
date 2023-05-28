@@ -22,7 +22,7 @@ function Header() {
                         {isSignedIn && <Link to="/" className="nav-link">Welcome, {user.username}!</Link>}
                         <Link to="/builder" className="nav-link">Builder</Link>
                         <Link to="/generator" className="nav-link">Generate</Link>
-                        <Link to="/" className="nav-link">Profile</Link>
+                        <Link to="#" className="nav-link">Profile</Link>
                         {isSignedIn ? <Link to="/sign-in" onClick={handleLogout} className="nav-link">Logout</Link> :  <Link to="/sign-in" className="nav-link">Sign In</Link>}
                     </Nav>
                 </Container>

@@ -240,20 +240,20 @@ function Builder() {
           <ListGroupItem variant="container">
 
               <Row><Col sm={3}>
-                <Form onSubmit={(e) => setSkills(e)}><Form.Label>Skills</Form.Label><Form.Control placeholder="enter Skill Here"  type="text" name="skill"/></Form>
+                <Form onSubmit={(e) => setSkills(e)}><Form.Label>Skills</Form.Label><Form.Control placeholder="Enter skills here"  type="text" name="skill"/></Form>
               </Col></Row>
               <CardGroup>{mapSkills()}</CardGroup>
           </ListGroupItem>
 
           <ListGroupItem variant="container">
-            <Button onClick={(e) => newJob(e)}>+ Job</Button>
+            <Button className="m-2" onClick={(e) => newJob(e)}>+ Job</Button>
             <Job item={builderInfo.jobs}
                         updateAccomJob={updateAccomJob}
                         updateJob={updateJob} 
                         removeItem={removeItem}/>
           </ListGroupItem>
           <ListGroupItem variant="container">
-            <Button onClick={(e) => newProject(e)}>+ Project</Button>
+            <Button className="m-2" onClick={(e) => newProject(e)}>+ Project</Button>
             <Project item={builderInfo.projects}
                         updateAccomProj={updateAccomProj}
                         updateProject={updateProject} 
@@ -261,7 +261,7 @@ function Builder() {
           </ListGroupItem>
 
           <ListGroupItem variant="container">
-            <Button onClick={(e) =>newEducation(e)}>+ Education</Button>
+            <Button className="m-2" onClick={(e) =>newEducation(e)}>+ Education</Button>
             <ResumeAccolade accolades={builderInfo.educations}
               which={{a: "school", b: "degree", type: "educations"}}
               updateAccolades={updateAccolades}
@@ -269,7 +269,7 @@ function Builder() {
             />
           </ListGroupItem>
           <ListGroupItem variant="container">
-            <Button onClick={(e) => newCertification(e)}>+ Certifications</Button>
+            <Button className="m-2" onClick={(e) => newCertification(e)}>+ Certifications</Button>
             <ResumeAccolade accolades={builderInfo.certifications}
               which={{a: "certification", b: "provider", type: "certifications"}}
               updateAccolades={updateAccolades}
@@ -277,7 +277,7 @@ function Builder() {
             />
           </ListGroupItem>
         </ListGroup>
-        <Button onClick={(e) => outputResume(e)}>Submit</Button>
+        <Button size="lg" className="mt-2 mb-4" onClick={(e) => outputResume(e)}>Submit</Button>
       </div>
   )
 }
