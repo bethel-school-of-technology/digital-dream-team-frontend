@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Container, Nav, Navbar, Stack, Image } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 import UserContext from "./contexts/UserContext";
+import '../css/Footer.css';
 
 function Header() {
     let { user, isSignedIn, setIsSignedIn } = useContext(UserContext);
@@ -12,7 +13,7 @@ function Header() {
     }
 
     return (
-        <div>
+        <div className="flex-wrapper">
             <Navbar bg="light" variant="light">
                 <Container>
                     <Nav className="nav-title-and-photo">
@@ -30,6 +31,7 @@ function Header() {
             <Stack gap={3} className="col-md-10 mx-auto mt-3">
                 <Outlet />
             </Stack>
+            <div className="footer bg-dark">Ⓒ 2023, Powered by the Digital Dream Team</div>
       </div>
     )
 }
