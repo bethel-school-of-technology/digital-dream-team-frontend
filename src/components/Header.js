@@ -17,7 +17,9 @@ function Header() {
             <Navbar bg="light" variant="light">
                 <Container>
                     <Nav className="nav-title-and-photo">
-                        <Image className="nav-photo" src={"arbys.png"} height="40" />
+                        <Link to="/">
+                            <Image className="nav-photo" src={"arbys.png"} height="40" />
+                        </Link>
                     </Nav>
                     <Nav>
                         {isSignedIn && <Link to="/" className="nav-link">Welcome, {user.username}!</Link>}

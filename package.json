@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/html2canvas": "^1.0.0",
+    "@types/jspdf": "^2.0.0",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "dotenv": "^16.0.3",
