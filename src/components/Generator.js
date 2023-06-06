@@ -8,11 +8,19 @@ function Generator(){
   let testResume = Data.example
   const [printResume, setPrintResume] = useState(testResume)
   
+  const { Configuration, OpenAIApi } = require("openai");
 
+  const configuration = new Configuration({
+    apiKey: "blah",
+  });
+
+  const openai = new OpenAIApi(configuration);
   //ayyyy sync
   async function proompt(e){
 
-    console.log("not implemented")
+    let app = document.getElementsByName("application")[0].value
+    
+    console.log("this is very dangerous")
     e.preventDefault()
   }
 
@@ -28,10 +36,10 @@ function Generator(){
             </Form.Group>
           </Form>
         </Card>
-
+        <Card><Printable
+        resume={printResume}/></Card>
       </CardGroup>
-      <Printable
-        resume={printResume}/>
+      
     </div>
   )
 }
