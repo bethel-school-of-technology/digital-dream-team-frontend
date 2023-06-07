@@ -1,19 +1,24 @@
-import React, { useState } from "react";
-import { Container, Row, Nav, Navbar, Stack, Image, ListGroup, ListGroupItem, Card, Form, Button, Col, CardGroup } from "react-bootstrap";
-import { Link, Outlet } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Row, ListGroup, ListGroupItem, Card, Form, Button, Col, CardGroup, Modal } from "react-bootstrap";
 import BuilderIdentity from "./builderComponents/BuilderIdentity";
 import Data from "./testObj/obj.json";
 import ResumeAccolade from "./builderComponents/ResumeAccolade";
-import ResumeItem from "./builderComponents/ResumeItem";
 import Project from "./builderComponents/Project";
 import Job from "./builderComponents/Job";
+import ResumeContext from "./contexts/ResumeContext";
+import { useNavigate } from "react-router-dom";
+
 
 function Builder() {
   //builder output struct
   let temp_output = Data.empty
 
+  const navigate = useNavigate();
+
+
   const [builderInfo, setBuilderInfo] = useState(temp_output)
 
+  let { addResume } = useContext(ResumeContext);
   //first enter does not add anything
   function setSkills(e) {
     e.preventDefault()//prevent double input
@@ -62,30 +67,41 @@ function Builder() {
   }
 
 
-  function updateJob(e){
-    let temp = builderInfo.jobs//its like builderinfo.projects
+  function updateJob(e, index){
+    //update specific one
+    let temp = builderInfo.jobs[index]
     temp[e.target.name] = e.target.value
- 
+    
+    //replace it in jobs
+    let jobsTemp = builderInfo.jobs
+    jobsTemp[index] = temp
+
     setBuilderInfo(
       builderInfo => {
         return {
               ...builderInfo,
-            jobs : temp
+            jobs : jobsTemp
         }
       }
     )
 
+
   }
 
-  function updateProject(e){
-    let temp = builderInfo.projects//its like builderinfo.projects
+  function updateProject(e, index){
+    //update which
+    let temp = builderInfo.projects[index]
     temp[e.target.name] = e.target.value
+
+    //replace it in proj
+    let projTemp = builderInfo.projects
+    projTemp[index] = temp
  
     setBuilderInfo(
       builderInfo => {
         return {
               ...builderInfo,
-            projects : temp
+            projects : projTemp
         }
       }
     )
@@ -112,12 +128,15 @@ function Builder() {
     )
   }
 
-  function updateAccolades(e, data){
+  function updateAccolades(e,index, data){
     let mkey = e.target.name.toLowerCase()
     let val = e.target.value
-    let temp = builderInfo[data]//its like builderinfo.certifications
+    let temp = builderInfo[data][index]//its like builderinfo.certifications
       //data form of a cert : {cert, provider, date}
-    temp[mkey] = val
+    
+    temp[mkey] = val //sets individual texts
+
+
     setBuilderInfo(
       builderInfo => {
         return {
@@ -171,9 +190,7 @@ function Builder() {
 
   function newEducation(e){
     let temp = builderInfo.educations
-    if (typeof(temp) === "object"){
-      temp = [temp]
-    }
+
     temp.push({
       "school": "",
       "degree" : "",
@@ -199,9 +216,6 @@ function Builder() {
 
   function newCertification(e){
     let temp = builderInfo.certifications
-    if (typeof(temp) === "object"){
-      temp = [temp]
-    }
     temp.push({
       "certification" : "",
       "provider" : "",
@@ -218,9 +232,39 @@ function Builder() {
     e.preventDefault()
   }
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   function outputResume(e){
-    console.log(builderInfo)
+    /*
+    //debuggin info
+    console.log(builderInfo.identity)
+    console.log(builderInfo.skills)
+    console.log(builderInfo.jobs)
+    console.log(builderInfo.projects)
+    console.log(builderInfo.educations)
+    console.log(builderInfo.certifications)
+    */
+    
+    
+    //following is the 'perfected' format for data
+    //console.log(Data.example)
+    //addResume(Data.example)
+
+    
+    //console.log(builderInfo)
+    addResume(builderInfo).then(response => {
+      if (response) {
+        navigate("/generator")
+      } else{
+        setShow(true)
+      }
+    })
     e.preventDefault()
+
+    
   }
   return (
       <div>
@@ -277,6 +321,21 @@ function Builder() {
             />
           </ListGroupItem>
         </ListGroup>
+        <>
+          <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Missing Fields in Resume</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Please fill out as much as you can
+            </Modal.Body>
+          </Modal>
+          </>
         <Button size="lg" className="mt-2 mb-4" onClick={(e) => outputResume(e)}>Submit</Button>
       </div>
   )

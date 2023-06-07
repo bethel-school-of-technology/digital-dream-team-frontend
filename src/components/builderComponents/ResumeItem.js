@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {Form,Row, Container, Nav, Navbar, Stack, Image, ListGroup, ListGroupItem, Card, Col, Button, InputGroup } from "react-bootstrap";
-import { Link, Outlet } from "react-router-dom";
+import {Form,Row, Container,  ListGroup, ListGroupItem,  Col, Button, InputGroup } from "react-bootstrap";
+
 
 function ResumeItem(props) {
 
@@ -73,7 +73,7 @@ function ResumeItem(props) {
 
   function removeAcc(e, which){
     props.removeAccomplishment(e, which)
-    if (bullets.length() == 1){
+    if (bullets.length() === 1){
       //setBullets([])
     }else{
       let index = bullets.indexOf(e.target[0].value)//should get text in form control

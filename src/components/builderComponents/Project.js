@@ -24,12 +24,12 @@ function Project(props){
 
   //map each individual project/job with it's accomplishments, add a blank acomplishment to bottom
   function projectsAndAccomps(){
-    return Projects.map(proj => {
+    return Projects.map((proj,index) => {
 
       return (<Container>
         <ListGroup>
           <ListGroupItem >
-            <Form onSubmit={(e, proj) => removeProject(e, proj, "projects")} onChange={(e)=>props.updateProject(e, props.which)}>
+            <Form onSubmit={(e, proj) => removeProject(e, proj, "projects")} onChange={(e)=>props.updateProject(e, index)}>
               <Row>
                 <InputGroup>
                   <Col md={5}><Form.Control placeholder="title" defaultValue={proj.title} name="title"/></Col>
@@ -57,10 +57,10 @@ function Project(props){
   }
   function bullets(proj){
     
-    if (!proj.accomplishment) {
+    if (!proj.accomplishments) {
       return <></>
     }
-    let accom = proj.accomplishment
+    let accom = proj.accomplishments
     //console.log(accom)
     return accom.map(bullet =>{
       return (
@@ -77,18 +77,20 @@ function Project(props){
   }
 
   function addAccomplishment(e, proj){
-    if (proj.accomplishment === undefined){
-      proj.accomplishment = []
+    if (proj.accomplishments === undefined){
+      proj.accomplishments = []
     }
-    proj.accomplishment.push(e.target[0].value)//cannot read properties of undefines
+    proj.accomplishments.push(e.target[0].value)//cannot read properties of undefines
     let temp = Projects
 
     let index = temp.findIndex(function(project){
       return project.title === proj.title
     })
     temp[index] = proj
+    console.log(temp)
     setProjects(temp)
-    //props.updateJob(temp)
+    props.updateAccomProj(temp)
+
     e.preventDefault()
     e.target.reset()
     forceUpdate()
@@ -108,7 +110,7 @@ function Project(props){
 
     temp[index] = proj
     setProjects(temp)
-    props.updateAccomProject(temp)
+    props.updateAccomProj(temp)
     e.preventDefault()
     e.target.reset()
     forceUpdate()

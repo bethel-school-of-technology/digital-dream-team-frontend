@@ -1,6 +1,6 @@
 import React, {useReducer} from "react";
-import { Form,Button, Container, Nav, Navbar, Stack, Image, ListGroup, ListGroupItem, Card, Col, Row, InputGroup } from "react-bootstrap";
-import { Link, Outlet } from "react-router-dom";
+import { Form,Button, ListGroup, ListGroupItem, Col, Row, InputGroup } from "react-bootstrap";
+
 
 function ResumeAccolade(props) {
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
@@ -24,12 +24,12 @@ function ResumeAccolade(props) {
   }
 
   function listAccolades(){
-    return accolades.map(accolade =>{
+    return accolades.map((accolade, index) =>{
       let a = ((accolade.certification !== undefined) ? accolade.certification : accolade.school)
       let b = ((accolade.certification !== undefined) ? accolade.provider : accolade.degree)
       
       return (<ListGroupItem>
-        <Form onSubmit={(e, accolade) => removeAccolade(e, accolade, props.which.type)} onChange={(e) => props.updateAccolades(e, props.which.type)} >
+        <Form onSubmit={(e, accolade) => removeAccolade(e, accolade, props.which.type)} onChange={(e) => props.updateAccolades(e, index, props.which.type)} >
           <Row>
             <InputGroup>
             <Col><Form.Control placeholder={bigA}  type="text" defaultValue={a} name={props.which.a}/></Col>

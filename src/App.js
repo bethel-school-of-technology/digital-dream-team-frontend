@@ -8,6 +8,7 @@ import { UserProvider } from './components/contexts/UserProvider';
 import { ResumeProvider } from './components/contexts/ResumeProvider';
 import SignUp from './components/SignUp';
 import Generator from './components/Generator';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                   <Route path="sign-in" element={<SignIn />} />
                   <Route path="sign-up" element={<SignUp />} />
                   <Route path="generator" element={<Generator />} />
+                  <Route path="profile" element={<Profile />} />
                 </Route>
                 <Route path="*" element={<h1>Page Not Found</h1>} />
             </Routes>
