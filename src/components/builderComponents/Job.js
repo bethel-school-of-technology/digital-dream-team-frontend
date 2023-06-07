@@ -24,12 +24,12 @@ function Job(props){
 
   //map each individual project/job with it's accomplishments, add a blank acomplishment to bottom
   function jobsAndAccomps(){
-    return Jobs.map(jp => {
+    return Jobs.map((jp, index) => {
 
       return (<Container>
         <ListGroup>
           <ListGroupItem >
-            <Form onSubmit={(e, jp) => removeJob(e, jp, "jobs")} onChange={(e)=>props.updateJob(e, props.which)}>
+            <Form onSubmit={(e, jp) => removeJob(e, jp, "jobs")} onChange={(e)=>props.updateJob(e, index)}>
               <Row>
                 <InputGroup>
                   <Col md={4}><Form.Control placeholder="title" defaultValue={jp.title} name="title"/></Col>
@@ -57,12 +57,10 @@ function Job(props){
     })
   }
   function bullets(jp){
-    
-    if (!jp.accomplishment) {
+    if (!jp.accomplishments) {
       return <></>
     }
-    let accom = jp.accomplishment
-    //console.log(accom)
+    let accom = jp.accomplishments
     return accom.map(bullet =>{
       return (
         <Row><Col sm={{span:8, offset:4}}>
@@ -77,11 +75,15 @@ function Job(props){
     })
   }
 
+  //find index of job, add new accom to accom array, 
+  //then replace existing job in Jobs array, then push whole thing and replace it in the state
   function addAccomplishment(e, jp){
-    if (jp.accomplishment === undefined){
-      jp.accomplishment = []
+
+    if (jp.accomplishments === undefined){
+      jp.accomplishments = []
     }
-    jp.accomplishment.push(e.target[0].value)//cannot read properties of undefines
+    
+    jp.accomplishments.push(e.target[0].value)//cannot read properties of undefines
     let temp = Jobs
 
     let index = temp.findIndex(function(job){
@@ -89,7 +91,8 @@ function Job(props){
     })
     temp[index] = jp
     setJob(temp)
-    //props.updateJob(temp)
+    props.updateAccomJob(temp)
+
     e.preventDefault()
     e.target.reset()
     forceUpdate()

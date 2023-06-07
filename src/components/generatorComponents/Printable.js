@@ -1,6 +1,9 @@
 
-import React, { useState } from "react";
-import { Container, Row, Nav, Navbar, Stack, Image, ListGroup, ListGroupItem, Card, Form, Button, Col, CardGroup } from "react-bootstrap";
+
+import React from "react";
+import {Button } from "react-bootstrap";
+import "../../css/Printable.css"
+
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
