@@ -1,7 +1,9 @@
 
+
 import React from "react";
 import {Button } from "react-bootstrap";
 import "../../css/Printable.css"
+
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
@@ -13,20 +15,35 @@ function Printable(props){
   let projects = resume.projects
   let educations = resume.educations
   let certs = resume.certifications
-  
-
+  let pStyle = { fontWeight:"bold"}
+  let letter = [612,791]
   function printDocument() {
-    const input = document.getElementById('divToPrint');
-    html2canvas(input)
-      .then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF();
-        pdf.addImage(imgData, 'JPEG', 0, 0);
-        // pdf.output('dataurlnewwindow');
-        pdf.save("download.pdf");
-      })
-    ;
+    let jsPdf = new jsPDF('p', 'pt', 'letter');
+        var htmlElement = document.getElementById('divToPrint');
+        
+        
+        // you need to load html2canvas (and dompurify if you pass a string to html)
+        const opt = {
+            callback: function (jsPdf) {
+                jsPdf.save("Test.pdf");
+                // to open the generated PDF in browser window
+                // window.open(jsPdf.output('bloburl'));
+            },
+            margin: [72, 72, 72, 72],
+            autoPaging: 'text',
+            format: "letter",
+            html2canvas: {
+                allowTaint: true,
+                dpi: 300,
+                letterRendering: true,
+                logging: false
+            }
+        };
+    
+        jsPdf.html(htmlElement, opt);
+    
   }
+
   function printHTML(e){
     printDocument()
     e.preventDefault()
@@ -102,25 +119,24 @@ function Printable(props){
     })
   }
   return (
-   <div>
+   <div style={{
+    width: "77.274%",
+    height: "100%",
+    fontSize: "0.5vw"
+  }}>
     <Button onClick={(e) => printHTML(e)}>Print</Button>
-    <div id="divToPrint" style={{
-        width: '210mm',
-        minHeight: '297mm',
-        marginLeft: 'auto',
-        marginRight: 'auto'
-      }}>
+    <div id="divToPrint" >
      <div contentEditable="true">
       {myHeader()}
-      <h5>Skills</h5>
+      <p style={pStyle}>Skills</p>
       <ul >{mapSkills()}</ul>
-      <h5>Professional Experience</h5>
+      <p style={pStyle}>Professional Experience</p>
       <div>{mapJobs()}</div>
-      <h5>Technical Experience</h5>
+      <p style={pStyle}>Technical Experience</p>
       <div>{mapProjects()}</div>
-      <h5>Education</h5>
+      <p style={pStyle}>Education</p>
       <div>{mapEducation()}</div>
-      <h5>Certifications</h5>
+      <p style={pStyle}>Certifications</p>
       <div>{mapCertifications()}</div>
     </div>
    </div>

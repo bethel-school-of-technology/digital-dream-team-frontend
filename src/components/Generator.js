@@ -6,7 +6,6 @@ import Printable from "./generatorComponents/Printable";
 import ResumeContext from "./contexts/ResumeContext";
 import { FaSpinner } from 'react-icons/fa';
 function Generator(){
-
   let { resumes, apiCall } = useContext(ResumeContext);
 
   //let testResume = Data.example
@@ -30,6 +29,7 @@ function Generator(){
       }
     }
   })
+
   //ayyyy sync
   function promptWrapper(e){
     e.preventDefault()
@@ -42,7 +42,6 @@ function Generator(){
       console.log(response.data)
       //setShowLoading(false)
     })
-
   }
 
   return (
@@ -58,9 +57,10 @@ function Generator(){
           </Form>
         </Card>
         <FaSpinner />
+        <Card><Printable
+        resume={printResume}/></Card>
       </CardGroup>
-      <Printable
-        resume={printResume}/>
+      
     </div>
   )
 }
