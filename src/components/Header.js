@@ -3,10 +3,15 @@ import { Container, Nav, Navbar, Stack, Image } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 import UserContext from "./contexts/UserContext";
 import '../css/Footer.css';
+import ResumeContext from "./contexts/ResumeContext";
 
 function Header() {
     let { user, isSignedIn, setIsSignedIn } = useContext(UserContext);
-
+    let { resumes } = useContext(ResumeContext);
+    let displayProfile = true;
+    if (resumes.length === 0) {
+        displayProfile = false;
+    }
     function handleLogout() {
       localStorage.clear()
       setIsSignedIn("")
@@ -25,7 +30,7 @@ function Header() {
                         {isSignedIn && <Link to="/" className="nav-link">Welcome, {user.username}!</Link>}
                         <Link to="/builder" className="nav-link">Builder</Link>
                         <Link to="/generator" className="nav-link">Generate</Link>
-                        {isSignedIn && <Link to="/profile" className="nav-link">Profile</Link>}
+                        {isSignedIn && displayProfile && <Link to="/profile" className="nav-link">Profile</Link>}
                         {isSignedIn ? <Link to="/sign-in" onClick={handleLogout} className="nav-link">Logout</Link> :  <Link to="/sign-in" className="nav-link">Sign In</Link>}
                     </Nav>
                 </Container>
