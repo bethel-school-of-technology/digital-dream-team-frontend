@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Row, ListGroup, ListGroupItem, Card, Form, Button, Col, CardGroup, Modal } from "react-bootstrap";
+import { Row, ListGroup, ListGroupItem, Card, Form, Button, Col, CardGroup, Modal, Container } from "react-bootstrap";
 import BuilderIdentity from "./builderComponents/BuilderIdentity";
 import Data from "./testObj/obj.json";
 import ResumeAccolade from "./builderComponents/ResumeAccolade";
@@ -336,7 +336,9 @@ function Builder() {
             </Modal.Body>
           </Modal>
           </>
-        <Button size="lg" className="mt-2 mb-4" onClick={(e) => outputResume(e)}>Submit</Button>
+          <Container className='d-flex justify-content-center'>
+            <Button size="lg" className="mt-2 mb-4" onClick={(e) => outputResume(e)}>Submit</Button>
+          </Container>
       </div>
   )
 }

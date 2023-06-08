@@ -27,3 +27,8 @@ h1 {
 li {
     margin-bottom: 1em;
 }
+
+.profile-card {
+    display: flex;
+    justify-content: center;
+}
