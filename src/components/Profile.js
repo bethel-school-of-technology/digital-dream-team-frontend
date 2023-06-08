@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import '../css/Home.css';
 import ResumeContext from './contexts/ResumeContext';
-import UserContext from './contexts/UserContext';
 import {Button, Card, ListGroup} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 const Profile = () => {
@@ -9,6 +8,7 @@ const Profile = () => {
     let { resumes } = useContext(ResumeContext);
     let lastResume = resumes.length - 1;
     let { identity, education, certification, jobs, skills } = resumes[lastResume];
+
     return (
         <div className='profile-card'>
             <Card className='mb-2' style={{ width: '36rem' }}>
