@@ -8,6 +8,7 @@ import ResumeContext from "./contexts/ResumeContext";
 function Header() {
     let { user, isSignedIn, setIsSignedIn } = useContext(UserContext);
     let { resumes } = useContext(ResumeContext);
+    // only display profile if resumes exist
     let displayProfile = true;
     if (resumes.length === 0) {
         displayProfile = false;
