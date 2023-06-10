@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-pdf/renderer": "^3.1.12",
     "@types/html2canvas": "^1.0.0",
     "@types/jspdf": "^2.0.0",
     "axios": "^1.4.0",

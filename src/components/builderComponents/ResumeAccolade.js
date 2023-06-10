@@ -27,7 +27,6 @@ function ResumeAccolade(props) {
     return accolades.map((accolade, index) =>{
       let a = ((accolade.certification !== undefined) ? accolade.certification : accolade.school)
       let b = ((accolade.certification !== undefined) ? accolade.provider : accolade.degree)
-      
       return (<ListGroupItem>
         <Form onSubmit={(e, accolade) => removeAccolade(e, accolade, props.which.type)} onChange={(e) => props.updateAccolades(e, index, props.which.type)} >
           <Row>

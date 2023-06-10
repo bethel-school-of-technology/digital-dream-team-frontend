@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useReducer } from "react";
 import { Row, ListGroup, ListGroupItem, Card, Form, Button, Col, CardGroup, Modal, Container } from "react-bootstrap";
 import BuilderIdentity from "./builderComponents/BuilderIdentity";
 import Data from "./testObj/obj.json";
@@ -14,11 +14,52 @@ function Builder() {
   let temp_output = Data.empty
 
   const navigate = useNavigate();
-
-
+  //issue probably here in temp output
   const [builderInfo, setBuilderInfo] = useState(temp_output)
+  const [runUse, setRunUse] = useState(true)
+  const[useEdit, setUseEdit] = useState(false)
+  let { addResume, editResume, resumes } = useContext(ResumeContext);
 
-  let { addResume } = useContext(ResumeContext);
+  //show error
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
+  //update from data in useEffect
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+
+  useEffect(() => {
+    if (runUse){
+      if (resumes.length > 0 ){
+        let resume = resumes[0]
+
+        let identity = resume.identity
+        let skills = resume.skills
+        let jobs = resume.jobs
+        let educations = resume.education    
+        let projects = resume.project
+        let certs = resume.certification
+        let res = {
+          "identity": identity,
+          "skills" : skills,
+          "jobs" : jobs,
+          "projects" : projects,
+          "educations" : educations,
+          "certifications" : certs,
+          "_id" : resume._id
+        }
+        console.log("res", res)
+
+        setBuilderInfo(res)
+        setUseEdit(true)
+        setRunUse(false)
+      }
+    }
+  },[runUse, resumes])
+
+
+
   //first enter does not add anything
   function setSkills(e) {
     e.preventDefault()//prevent double input
@@ -185,7 +226,6 @@ function Builder() {
       }
     )
     e.preventDefault()
-
   }
 
   function newEducation(e){
@@ -231,41 +271,33 @@ function Builder() {
     )
     e.preventDefault()
   }
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   function outputResume(e){
-    /*
-    //debuggin info
-    console.log(builderInfo.identity)
-    console.log(builderInfo.skills)
-    console.log(builderInfo.jobs)
-    console.log(builderInfo.projects)
-    console.log(builderInfo.educations)
-    console.log(builderInfo.certifications)
-    */
-    
-    
-    //following is the 'perfected' format for data
-    //console.log(Data.example)
-    //addResume(Data.example)
 
-    
-    //console.log(builderInfo)
-    addResume(builderInfo).then(response => {
-      if (response) {
-        navigate("/generator")
-      } else{
-        setShow(true)
-      }
-    })
+    if (useEdit){
+      console.log("output build from edit",builderInfo)
+      
+      editResume(builderInfo).then(response => {
+        if (response) {
+          navigate("/generator")
+        } else{
+          setShow(true)
+        }
+      })
+      e.preventDefault()
+    } else{
+      addResume(builderInfo).then(response => {
+        if (response) {
+          navigate("/generator")
+        } else{
+          setShow(true)
+        }
+      })
+    }
     e.preventDefault()
 
     
   }
+
   return (
       <div>
         <style type="text/css">
@@ -337,7 +369,7 @@ function Builder() {
           </Modal>
           </>
           <Container className='d-flex justify-content-center'>
-            <Button size="lg" className="mt-2 mb-4" onClick={(e) => outputResume(e)}>Submit</Button>
+          <Button size="lg" className="mt-2 mb-4" onClick={(e) => outputResume(e)}>Submit</Button>
           </Container>
       </div>
   )

@@ -23,7 +23,7 @@ function BuilderIdentity(props) {
         <Form.Group as={Row} className="mb-3" >
           <Col><Form.Text  sm={2}>{title}</Form.Text></Col>
           <Col sm={8}>
-            <Form.Control name={title}/>
+            <Form.Control name={title} defaultValue={identityState[title.toLowerCase()]}/>
           </Col>
         </Form.Group>
     </Card.Body>
@@ -38,21 +38,21 @@ function BuilderIdentity(props) {
                   <Form.Group as={Row} className="mb-3" >
                     <Col><Form.Text  sm={2}>{"First Name"}</Form.Text></Col>
                     <Col sm={8}>
-                      <Form.Control name="first" />
+                      <Form.Control name="first" defaultValue={identityState.first} />
                     </Col>
                   </Form.Group>
 
                   <Form.Group as={Row} className="mb-3" >
                     <Col><Form.Text  sm={2}>{"Last Name"}</Form.Text></Col>
                     <Col sm={8}>
-                      <Form.Control name="last"/>
+                      <Form.Control name="last" defaultValue={identityState.last}/>
                     </Col>
                   </Form.Group>
 
                   <Form.Group as={Row} className="mb-3" >
                     <Col><Form.Text  sm={2}>{"Title"}</Form.Text></Col>
                     <Col sm={8}>
-                      <Form.Control name="title"/>
+                      <Form.Control name="title" defaultValue={identityState.title}/>
                     </Col>
                   </Form.Group>
                 </Form>

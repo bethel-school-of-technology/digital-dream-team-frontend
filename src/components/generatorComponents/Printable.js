@@ -2,7 +2,8 @@
 
 import React from "react";
 import {Button } from "react-bootstrap";
-import "../../css/Printable.css"
+//import "../../css/Printable.css"
+import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -17,30 +18,35 @@ function Printable(props){
   let certs = resume.certifications
   let pStyle = { fontWeight:"bold"}
   let letter = [612,791]
+
+
+  //test 
+  const styles = StyleSheet.create({
+    page: {
+      flexDirection: 'row',
+      backgroundColor: '#E4E4E4'
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+      flexGrow: 1
+    }
+  });
+
+  
   function printDocument() {
-    let jsPdf = new jsPDF('p', 'pt', 'letter');
-        var htmlElement = document.getElementById('divToPrint');
-        
-        
-        // you need to load html2canvas (and dompurify if you pass a string to html)
-        const opt = {
-            callback: function (jsPdf) {
-                jsPdf.save("Test.pdf");
-                // to open the generated PDF in browser window
-                // window.open(jsPdf.output('bloburl'));
-            },
-            margin: [72, 72, 72, 72],
-            autoPaging: 'text',
-            format: "letter",
-            html2canvas: {
-                allowTaint: true,
-                dpi: 300,
-                letterRendering: true,
-                logging: false
-            }
-        };
+    let doc = new jsPDF({
+      orientation: 'p',
+      unit: 'px',
+      format: 'letter',
+      hotfixes: ['px_scaling']
+    });
+    var htmlElement = document.getElementById('divToPrint');
+    var newWindow = window.open();
+    //console.log(htmlElement)
+
+    newWindow.document.write(htmlElement.outerHTML);
     
-        jsPdf.html(htmlElement, opt);
     
   }
 
@@ -119,11 +125,7 @@ function Printable(props){
     })
   }
   return (
-   <div style={{
-    width: "77.274%",
-    height: "100%",
-    fontSize: "0.5vw"
-  }}>
+   <div >
     <Button onClick={(e) => printHTML(e)}>Print</Button>
     <div id="divToPrint" >
      <div contentEditable="true">
@@ -145,3 +147,26 @@ function Printable(props){
 }
 
 export default Printable
+
+/*<Document>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.section}>
+        <Text>{myHeader()}</Text>
+      </View>
+      <View style={styles.section}>
+        <Text><ul >{mapSkills()}</ul></Text>
+      </View>
+      <View style={styles.section}>
+        <Text>{mapJobs()}</Text>
+      </View>
+      <View style={styles.section}>
+        <Text>{mapProjects()}</Text>
+      </View>
+      <View style={styles.section}>
+        <Text>{mapEducation()}</Text>
+      </View>
+      <View style={styles.section}>
+        <Text>{mapCertifications()}</Text>
+      </View>
+    </Page>
+  </Document> */
