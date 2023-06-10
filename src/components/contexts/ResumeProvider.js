@@ -70,14 +70,19 @@ export const ResumeProvider = (props) => {
     }
 
     //sends application and resume to apicall api function then replies with new resume
-    function apiCall(resume, application) {
+    async function apiCall(resume, application) {
         let myHeaders = {
             Authorization: `Bearer ${localStorage.getItem('myUserToken')}`
         };
+
         let send = {"resume" : resume, "application" : application}
-        axios.post(`${baseUrl}generate`, send , {headers: myHeaders})
-            .then(response => { return new Promise((resolve) => resolve(response.data))})
+
+        return axios.post(`${baseUrl}generate`, send , {headers: myHeaders})
+            .then(response => {
+                return new Promise((resolve) => resolve(response.data))
+            })
     }
+
     return (
         <ResumeContext.Provider value={{
             resumes,

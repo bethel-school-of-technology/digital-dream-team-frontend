@@ -1,17 +1,24 @@
 
 import React, { useContext, useState,useEffect } from "react";
-import {  Card, Form, Button, CardGroup } from "react-bootstrap";
+import {  Card, Form, Button, CardGroup, Row } from "react-bootstrap";
 import Data from "./testObj/obj.json"
 import Printable from "./generatorComponents/Printable";
 import ResumeContext from "./contexts/ResumeContext";
 import { FaSpinner } from 'react-icons/fa';
+
+import { PDFDownloadLink } from '@react-pdf/renderer';
+
 function Generator(){
   let { resumes, apiCall } = useContext(ResumeContext);
 
   //let testResume = Data.example
+  //print resume should be Data.empty
   const [printResume, setPrintResume] = useState(Data.empty)
   const [runUse, setRunUse] = useState(true)
-  const [showLoading, setShowLoading] = useState(false)
+  //const [showLoading, setShowLoading] = useState(false)
+
+  //testing uncomment later
+  
   useEffect(() => {
     if (runUse){
       if (resumes.length > 0 ){
@@ -36,33 +43,51 @@ function Generator(){
     proompt(e)
   }
   async function proompt(e){
-    //console.log(e.target[0].value)
     //setShowLoading(true)
-    apiCall(printResume, e.target[0].value).then((response) => {
-      console.log(response.data)
-      //setShowLoading(false)
-    })
-  }
+    await apiCall(printResume, e.target[0].value)
+      .then((response) => {
 
+        console.log(response.text)
+        let jres = JSON.parse(response.text)
+        let res = {
+          "identity": printResume.identity,
+          "skills": jres.skills,
+          "jobs" : jres.jobs,
+          "projects" : jres.projects,
+          "educations" :  jres.educations,
+          "certifications" : jres.certifications
+        }
+        setPrintResume(res)
+        //setShowLoading(false)
+      })
+  }
+//<FaSpinner />
   return (
     <div>
       <CardGroup>
-        <Card>
-          <Form onSubmit={(e) => promptWrapper(e)}>
-            <Form.Group  className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <Row style={{width : "100%"}}><Card className="mb-3" >
+          <Form  onSubmit={(e) => promptWrapper(e)}>
+            <Form.Group  style={{width : "100%"}}className="mb-3" controlId="exampleForm.ControlTextarea1">
               <Form.Label>Application information</Form.Label>
-              <Form.Control name="application" as="textarea" rows={10} placeholder="Paste the job application here"/>
+              <Form.Control name="application" as="textarea" rows={5} placeholder="Paste the job application here"/>
               <Button  type="submit">Generate</Button>
             </Form.Group>
           </Form>
-        </Card>
-        <FaSpinner />
-        <Card><Printable
-        resume={printResume}/></Card>
+        </Card></Row>
+        
+        <Row style={{width : "100%"}}><Card className="mb-3"><Printable
+        resume={printResume}/></Card></Row>
       </CardGroup>
-      
+     
     </div>
   )
 }
 
 export default Generator
+
+/*
+ <PDFDownloadLink document={<Printable resume={printResume}/>} fileName="resume.pdf">
+                {({ blob, url, loading, error }) =>
+                    loading ? 'Loading document...' : 'Download now!'
+                }
+            </PDFDownloadLink> */

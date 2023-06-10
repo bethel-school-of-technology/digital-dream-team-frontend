@@ -7,7 +7,7 @@ function Job(props){
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
 
-  let [Jobs, setJob] = useState(props.item)
+  let Jobs = props.item
 
   function removeJob(e, item, type){
     let indexAcc = Jobs.findIndex(function(acc){
@@ -34,8 +34,8 @@ function Job(props){
                 <InputGroup>
                   <Col md={4}><Form.Control placeholder="title" defaultValue={jp.title} name="title"/></Col>
                   <Col md={3}><Form.Control placeholder="Company"defaultValue={jp.company} name="company"/></Col>
-                  <Col md={2}><Form.Control placeholder="Start"defaultValue={jp.start} name="startdate"/></Col>
-                  <Col md={2}><Form.Control placeholder="End" defaultValue={jp.end} name="enddate"/></Col>
+                  <Col md={2}><Form.Control placeholder="Start"defaultValue={jp.startdate} name="startdate"/></Col>
+                  <Col md={2}><Form.Control placeholder="End" defaultValue={jp.enddate} name="enddate"/></Col>
                   <Button type="submit">-</Button>
                  </InputGroup>
               </Row>
@@ -90,7 +90,7 @@ function Job(props){
       return job.title === jp.title
     })
     temp[index] = jp
-    setJob(temp)
+    //setJob(temp)
     props.updateAccomJob(temp)
 
     e.preventDefault()
@@ -111,7 +111,6 @@ function Job(props){
     })
 
     temp[index] = jp
-    setJob(temp)
     props.updateAccomJob(temp)
     e.preventDefault()
     e.target.reset()

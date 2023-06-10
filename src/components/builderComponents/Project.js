@@ -1,13 +1,12 @@
 import React, {useState, useReducer} from "react";
-import {Form,Row, Container, Nav, Navbar, Stack, Image, ListGroup, ListGroupItem, Card, Col, Button, InputGroup } from "react-bootstrap";
-import { Link, Outlet } from "react-router-dom";
+import {Form,Row, Container, ListGroup, ListGroupItem, Col, Button, InputGroup } from "react-bootstrap";
 
 
 function Project(props){
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
 
-  let [Projects, setProjects] = useState(props.item)
+  let Projects = props.item
 
   function removeProject(e, item, type){
     let indexAcc = Projects.findIndex(function(acc){
@@ -33,8 +32,8 @@ function Project(props){
               <Row>
                 <InputGroup>
                   <Col md={5}><Form.Control placeholder="title" defaultValue={proj.title} name="title"/></Col>
-                  <Col md={2}><Form.Control placeholder="Start"defaultValue={proj.start} name="startdate"/></Col>
-                  <Col md={2}><Form.Control placeholder="End" defaultValue={proj.end} name="enddate"/></Col>
+                  <Col md={2}><Form.Control placeholder="Start"defaultValue={proj.startdate} name="startdate"/></Col>
+                  <Col md={2}><Form.Control placeholder="End" defaultValue={proj.enddate} name="enddate"/></Col>
                   <Button type="submit">-</Button>
                 </InputGroup>
               </Row>
@@ -81,14 +80,13 @@ function Project(props){
       proj.accomplishments = []
     }
     proj.accomplishments.push(e.target[0].value)//cannot read properties of undefines
-    let temp = Projects
+    let temp = props.item
 
     let index = temp.findIndex(function(project){
       return project.title === proj.title
     })
     temp[index] = proj
     console.log(temp)
-    setProjects(temp)
     props.updateAccomProj(temp)
 
     e.preventDefault()
@@ -102,14 +100,13 @@ function Project(props){
       return acc === accom
     })
     proj.accomplishment.splice(indexAcc, 1)
-    let temp = Projects
+    let temp = props.item
 
     let index = temp.findIndex(function(project){
       return project.title === proj.title
     })
 
     temp[index] = proj
-    setProjects(temp)
     props.updateAccomProj(temp)
     e.preventDefault()
     e.target.reset()
